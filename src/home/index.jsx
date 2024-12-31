@@ -37,8 +37,8 @@ function Home() {
           </div>
           <div className="flex gap-4 justify-center items-center my-4">
             <Link to = { user.isSignedIn
-                  ? "http://localhost:5173/auth/dashboard" 
-                  : "http://localhost:5173/auth/sign-in"}>
+                  ? "https://ai-resume-builder-ruby.vercel.app/auth/dashboard" 
+                  : "https://ai-resume-builder-ruby.vercel.app/auth/sign-in"}>
             <Button className="py-6 px-4 flex gap-2 bg-violet-600 hover:bg-violet-500">
               Get Started
               <ArrowRight />
