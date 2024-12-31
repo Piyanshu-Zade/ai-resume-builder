@@ -23,7 +23,7 @@ function ViewResume() {
     }
 
     const HandleDownload=()=>{
-        window.print();
+        window.print()
     }
 
   return (
