@@ -4,7 +4,7 @@ import { ResumeInfoContext } from '@/context/ResumeInfoContext'
 import ResumePreview from '@/dashboard/resume/components/ResumePreview'
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import GlobalApi from './../../../../service/GlobalApi'
+import GlobalApi from './../../../../service/GlobalApi.js'
 import { RWebShare } from 'react-web-share'
 
 function ViewResume() {
@@ -14,15 +14,10 @@ function ViewResume() {
 
     useEffect(() => {
         GetResumeInfo();
-    }, [])
-
-    const GetResumeInfo = () => {
-        GlobalApi.GetResumeById(resumeId).then(resp => {
-            if(resp) {
-                setResumeInfo(resp.data.data);
-            } else {
-                console.log("Error getting resume")
-            }
+    },[])
+    const GetResumeInfo=()=>{
+        GlobalApi.GetResumeById(resumeId).then(resp=>{
+            setResumeInfo(resp.data.data);
         })
     }
 
