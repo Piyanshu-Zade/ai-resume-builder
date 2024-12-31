@@ -235,8 +235,8 @@ function Home() {
           <div className="mt-12 text-center">
             <Link
               to = { user.isSignedIn
-                  ? "http://localhost:5173/auth/dashboard" 
-                  : "http://localhost:5173/auth/sign-in"}
+                  ? "https://ai-resume-builder-ruby.vercel.app/auth/dashboard" 
+                  : "https://ai-resume-builder-ruby.vercel.app/auth/sign-in"}
               className="inline-block rounded bg-pink-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-pink-700 focus:outline-none focus:ring focus:ring-yellow-400"
             >
               Get Started Today
