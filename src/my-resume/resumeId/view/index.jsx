@@ -15,9 +15,14 @@ function ViewResume() {
     useEffect(()=>{
         GetResumeInfo();
     },[])
-    const GetResumeInfo=()=>{
-        GlobalApi.GetResumeById(resumeId).then(resp=>{
-            setResumeInfo(resp.data.data);
+    
+     const GetResumeInfo = () => {
+        GlobalApi.GetResumeById(resumeId).then(resp => {
+            if(resp) {
+                setResumeInfo(resp.data.data);
+            } else {
+                console.log("Error getting resume")
+            }
         })
     }
 
