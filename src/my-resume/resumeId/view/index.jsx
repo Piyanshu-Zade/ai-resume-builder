@@ -9,55 +9,60 @@ import { RWebShare } from 'react-web-share'
 
 function ViewResume() {
 
-    const [resumeInfo, setResumeInfo] = useState();
-    const { resumeId } = useParams();
+    const [resumeInfo,setResumeInfo]=useState();
+    const {resumeId}=useParams();
 
-    useEffect(() => {
+    useEffect(()=>{
         GetResumeInfo();
     },[])
     const GetResumeInfo=()=>{
         GlobalApi.GetResumeById(resumeId).then(resp=>{
-            setResumeInfo(resp.data.data);
+            if(resp.data) {
+                console.log(resp.data)
+                setResumeInfo(resp.data.data);
+            } else {
+                setResumeInfo("")
+            }
         })
     }
 
-    const HandleDownload = () => {
+    const HandleDownload=()=>{
         window.print();
     }
 
-    return (
-        <ResumeInfoContext.Provider value={{ resumeInfo, setResumeInfo }} >
-            <div id="no-print">
-                <Header />
+  return (
+    <ResumeInfoContext.Provider value={{resumeInfo,setResumeInfo}} >
+        <div id="no-print">
+        <Header/>
 
-                <div className='my-10 mx-10 md:mx-20 lg:mx-36'>
-                    <h2 className='text-center text-2xl font-medium'>
-                        Congrats! Your Ultimate AI generates Resume is ready ! </h2>
-                    <p className='text-center text-gray-400'>Now you are ready to download your resume and you can share unique
-                        resume url with your friends and family </p>
-                    <div className='flex justify-between px-44 my-10'>
-                        <Button onClick={HandleDownload}>Download</Button>
-
-                        <RWebShare
-                            data={{
-                                text: "Hello Everyone, This is my resume please open url to see it",
-                                url: import.meta.env.VITE_BASE_URL + "/my-resume/" + resumeId + "/view",
-                                title: resumeInfo?.firstName + " " + resumeInfo?.lastName + " resume",
-                            }}
-                            onClick={() => console.log("shared successfully!")}
-                        > <Button>Share</Button>
-                        </RWebShare>
-                    </div>
-                </div>
-
+        <div className='my-10 mx-10 md:mx-20 lg:mx-36'>
+            <h2 className='text-center text-2xl font-medium'>
+                Congrats! Your Ultimate AI generates Resume is ready ! </h2>
+                <p className='text-center text-gray-400'>Now you are ready to download your resume and you can share unique 
+                    resume url with your friends and family </p>
+            <div className='flex justify-between px-44 my-10'>
+                <Button onClick={HandleDownload}>Download</Button>
+               
+                <RWebShare
+        data={resumeInfo && {
+          text: "Hello Everyone, This is my resume please open url to see it",
+          url: import.meta.env.VITE_BASE_URL+"/my-resume/"+resumeId+"/view",
+          title: resumeInfo?.firstName+" "+resumeInfo?.lastName+" resume",
+        }}
+        onClick={() => console.log("shared successfully!")}
+      > <Button>Share</Button>
+      </RWebShare>
             </div>
-            <div className='my-10 mx-10 md:mx-20 lg:mx-36'>
-                <div id="print-area" >
-                    <ResumePreview />
-                </div>
+        </div>
+            
+        </div>
+        <div className='my-10 mx-10 md:mx-20 lg:mx-36'>
+        <div id="print-area" >
+                <ResumePreview/>
             </div>
-        </ResumeInfoContext.Provider>
-    )
+            </div>
+    </ResumeInfoContext.Provider>
+  )
 }
 
 export default ViewResume
